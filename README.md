@@ -4,7 +4,7 @@ Projeto do tutorial de API com Golang.
 
 # Stack
 
-* Gin Framework
+* Echo Framework
 * Gmock
 * Gomega
 * PostgreSQL
@@ -22,7 +22,7 @@ $ go mod download
 ## Executar em modo Desenvolvimento
 
 ```shell
-$ go run cmd/simple-api/main.go
+$ go run cmd/main.go
 ```
 
 ## Executando os testes
