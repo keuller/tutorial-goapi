@@ -2,27 +2,20 @@ package web
 
 import (
 	"net/http"
-	"os"
 
-	"github.com/gin-contrib/gzip"
-	"github.com/gin-gonic/gin"
+	echo "github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 )
 
-func Server() *gin.Engine {
-	mode := os.Getenv("MODE")
-	if mode != "dev" {
-		gin.SetMode(gin.ReleaseMode)
-	}
+func Server() *echo.Echo {
+	app := echo.New()
 
-	app := gin.Default()
-	app.RedirectTrailingSlash = true
+	app.Use(middleware.Recover())
+	app.Use(middleware.Gzip())
 
-	app.Use(gin.Recovery())
-	app.Use(gzip.Gzip(gzip.DefaultCompression))
-
-	app.GET("/", func(ctx *gin.Context) {
-		ctx.JSON(http.StatusOK, gin.H{
-			"message": "It works!",
+	app.GET("/", func(ctx echo.Context) error {
+		return ctx.JSON(http.StatusOK, map[string]string{
+			"status": "OK",
 		})
 	})
 
