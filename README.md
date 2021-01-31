@@ -22,7 +22,7 @@ $ go mod download
 ## Executar em modo Desenvolvimento
 
 ```shell
-$ go run cmd/simple-api/main.go
+$ go run cmd/main.go
 ```
 
 ## Executando os testes
