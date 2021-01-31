@@ -2,12 +2,11 @@ package factory
 
 import (
 	"fmt"
-	"os"
 
 	"github.com/jmoiron/sqlx"
-	"github.com/joho/godotenv"
 	"github.com/keuller/simple-api/internal/application/persistence"
 	"github.com/keuller/simple-api/internal/business"
+	"github.com/keuller/simple-api/internal/config"
 
 	_ "github.com/lib/pq"
 )
@@ -25,16 +24,14 @@ func init() {
 }
 
 func connectionString() string {
-	if err := godotenv.Load(); err != nil {
-		panic(err.Error())
-	}
+	config := config.Get()
 
-	host := os.Getenv("PG_HOST")
-	port := os.Getenv("PG_PORT")
-	pgdb := os.Getenv("PG_DATABASE")
-	schema := os.Getenv("PG_SCHEMA")
-	user := os.Getenv("PG_USER")
-	pass := os.Getenv("PG_PASS")
+	host := config.GetString("PG_HOST")
+	port := config.GetString("PG_PORT")
+	pgdb := config.GetString("PG_DATABASE")
+	schema := config.GetString("PG_SCHEMA")
+	user := config.GetString("PG_USER")
+	pass := config.GetString("PG_PASS")
 
 	return fmt.Sprintf("host=%s port=%s dbname=%s search_path=%s user=%s password=%s sslmode=disable", host, port, pgdb, schema, user, pass)
 }

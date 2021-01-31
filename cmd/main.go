@@ -3,16 +3,15 @@ package main
 import (
 	"fmt"
 	"log"
-	"os"
 
-	"github.com/joho/godotenv"
 	"github.com/keuller/simple-api/internal/application/web"
+	"github.com/keuller/simple-api/internal/config"
 )
 
 func main() {
-	_ = godotenv.Load()
+	config := config.Get()
 
-	http_port := fmt.Sprintf(":%s", os.Getenv("HTTP_PORT"))
+	http_port := fmt.Sprintf(":%s", config.GetString("HTTP_PORT"))
 
 	server := web.Server()
 
