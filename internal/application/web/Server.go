@@ -26,6 +26,8 @@ func Server() *gin.Engine {
 		})
 	})
 
+	app.GET("/async", AsyncHandler)
+
 	crud := app.Group("/v1/tasks")
 	{
 		crud.POST("", CreateHandler)

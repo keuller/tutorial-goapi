@@ -1,7 +1,9 @@
 package web
 
 import (
+	"fmt"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/keuller/simple-api/internal/application/factory"
@@ -10,7 +12,7 @@ import (
 
 var service = factory.GetTaskService()
 
-// HTTP handler that creates a task
+// CreateHandler - handler that creates a task
 func CreateHandler(ctx *gin.Context) {
 	var data models.AddTask
 
@@ -75,6 +77,7 @@ func ListTaskHandler(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, tasks)
 }
 
+// ToggleTaskHandler handles task status
 func ToggleTaskHandler(ctx *gin.Context) {
 	if err := service.ToggleTask(ctx.Param("id")); err != nil {
 		ctx.AbortWithError(http.StatusBadRequest, err)
@@ -82,4 +85,17 @@ func ToggleTaskHandler(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusNoContent, gin.H{})
+}
+
+// AsyncHandler - show up how to create async code inside a handler
+func AsyncHandler(ctx *gin.Context) {
+	context := ctx.Copy()
+	stop := make(chan int)
+	go func() {
+		time.Sleep(3 * time.Second)
+		fmt.Println("Done! Path: " + context.Request.URL.Path)
+		stop <- 0
+	}()
+	<-stop
+	ctx.String(http.StatusOK, "Async handler done.")
 }
