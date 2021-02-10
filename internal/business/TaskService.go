@@ -65,7 +65,7 @@ func (s TaskService) ListTasks() []m.TaskResource {
 	list := make([]m.TaskResource, 0)
 
 	for _, task := range tasks {
-		list = append(list, m.TaskResource{task.ID, task.Title, task.Description, task.Done})
+		list = append(list, m.TaskResource{ID: task.ID, Title: task.Title, Description: task.Description, Done: task.Done})
 	}
 
 	return list

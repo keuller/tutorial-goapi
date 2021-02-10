@@ -11,10 +11,10 @@ import (
 func main() {
 	config := config.Get()
 
-	http_port := fmt.Sprintf(":%s", config.GetString("HTTP_PORT"))
+	httpPort := fmt.Sprintf(":%s", config.GetString("HTTP_PORT"))
 
 	server := web.Server()
 
-	log.Println(fmt.Sprintf("Service up and running on http://localhost%s", http_port))
-	server.Run(http_port)
+	log.Println(fmt.Sprintf("Service up and running on http://localhost%s", httpPort))
+	server.Run(httpPort)
 }
