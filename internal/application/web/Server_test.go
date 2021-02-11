@@ -19,13 +19,13 @@ func TestPing(t *testing.T) {
 
 	Expect(w.Code).Should(Equal(200))
 	Expect(w.Body.String()).Should(ContainSubstring("It works!"))
-	Expect(w.Body.String()).Should(Equal("{\"message\":\"It works!\"}"))
+	Expect(w.Body.String()).Should(Equal("{\"message\":\"It works!\"}\n"))
 }
 
 func TestListTasks(t *testing.T) {
-	t.Skip()
+	//t.Skip()
 
-	app := Server()
+	app := NewServer("8000")
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/v1/tasks", nil)
 	app.ServeHTTP(w, req)

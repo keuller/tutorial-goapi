@@ -1,6 +1,6 @@
 #!/bin/bash
 
-go test -cover -coverprofile=c.out ./internal/business/...
+go test -cover -coverprofile=c.out ./...
 
 go tool cover -html=c.out -o cover.html
 

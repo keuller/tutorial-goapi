@@ -30,7 +30,7 @@ func NewServer(port string) *Server {
 
 	router.Get("/", func(w http.ResponseWriter, r *http.Request) {
 		render.JSON(w, r, map[string]string{
-			"status": "OK",
+			"message": "It works!",
 		})
 	})
 

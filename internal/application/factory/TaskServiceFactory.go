@@ -26,7 +26,9 @@ func init() {
 
 func connectionString() string {
 	if err := godotenv.Load(); err != nil {
-		panic(err.Error())
+		if err = godotenv.Load("../../../.env"); err != nil { // only for unit test purpose
+			panic(err.Error())
+		}
 	}
 
 	host := os.Getenv("PG_HOST")
