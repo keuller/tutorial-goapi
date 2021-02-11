@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY . /app
 
-RUN CGO_ENABLED=0 GOOS=linux GOPROXY=https://proxy.golang.org go build -o app cmd/main.go
+RUN CGO_ENABLED=0 GOOS=linux GOPROXY=https://proxy.golang.org go build -ldflags="-s -w" -o app cmd/main.go
 
 FROM alpine:latest
 
