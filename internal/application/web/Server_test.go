@@ -1,7 +1,6 @@
 package web
 
 import (
-	"encoding/json"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -13,7 +12,7 @@ import (
 func TestPing(t *testing.T) {
 	RegisterTestingT(t)
 
-	app := Server()
+	app := NewServer("8000")
 	w := httptest.NewRecorder()
 	req, _ := http.NewRequest("GET", "/", nil)
 	app.ServeHTTP(w, req)

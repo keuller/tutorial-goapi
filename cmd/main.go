@@ -12,10 +12,10 @@ import (
 func main() {
 	_ = godotenv.Load()
 
-	http_port := fmt.Sprintf(":%s", os.Getenv("HTTP_PORT"))
+	httpPort := fmt.Sprintf(":%s", os.Getenv("HTTP_PORT"))
 
-	server := web.Server()
+	server := web.NewServer(httpPort)
 
-	log.Println(fmt.Sprintf("Service up and running on http://localhost%s", http_port))
-	server.Start(http_port)
+	log.Println(fmt.Sprintf("Service up and running on http://localhost%s", httpPort))
+	server.Start()
 }
