@@ -15,7 +15,7 @@ func Server() *echo.Echo {
 
 	app.GET("/", func(ctx echo.Context) error {
 		return ctx.JSON(http.StatusOK, map[string]string{
-			"status": "OK",
+			"message": "It works!",
 		})
 	})
 
